@@ -1,4 +1,5 @@
 from flask import Flask, request
+from waitress import serve
 from flask_cors import CORS
 from openaiapi import chat_completion
 
@@ -42,4 +43,5 @@ def formalize():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8000)
+    serve(app, host='0.0.0.0', port=50100, threads=2)
+    # app.run(debug=True, port=8000)
