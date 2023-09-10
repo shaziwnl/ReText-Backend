@@ -1,18 +1,21 @@
-import os
+from dotenv import load_dotenv
 import openai
+import os
 
-openai.api_key = "YOUR_API_KEY"
+load_dotenv()
+
+openai.api_key = os.getenv('OPENAI_API_KEY')
 
 def chat_completion(task, content):
   completion = openai.ChatCompletion.create(
+    temperature=0.2,
     max_tokens=len(content)//2,
     model="gpt-3.5-turbo",
     messages=[
-      {"role": "system", "content": "You are a writing assistant who helps with grammar, restructuring sentences, etc."},
-      {"role": "user", "content": task + " this sentence - " + content }
+      # {"role": "system", "content": "You are a writing assistant that helps the user with correcting grammatical mistakes in their text, or restructure sentences to make the meaning of the texts more clear or concise."},
+      {"role": "user", "content":  "Make this sentence " + task + "-" + '"' + content + '"'}
     ]
   )
-  return completion.choices[0].message
+  return completion.choices[0].message.content
 
-# print(chat_completion("restructure", "I need to see the details now immediately"))
-# print(chat_completion("correct the grammar of", "Myself name is Sharang"))
+# print(chat_completion("formalize", "Hi there my name is A what is Yours?"))
