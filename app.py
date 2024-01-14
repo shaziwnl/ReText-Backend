@@ -6,15 +6,10 @@ from openaiapi import chat_completion
 app = Flask(__name__)
 CORS(app)
 
-# @app.route('/')
-# def hello_world():
-#     return 'Hello, World!'
-
 @app.route('/verbose', methods=['POST'])
 def verbose():
     if request.method == 'POST':
         sentence = request.get_json().get('sentence')
-        # return jsonify({"sentence": sentence})
         return ( {"completion" : chat_completion("You are a writing assistant that adds detail to texts. Add details to the following text", sentence)} )
 
 
@@ -22,7 +17,6 @@ def verbose():
 def concise():
     if request.method == 'POST':
         sentence = request.get_json().get('sentence')
-        # return jsonify({"sentence": sentence})
         return ( {"completion" : chat_completion("You are a writing assistant that helps make texts more concise. Make the following text more concise", sentence)} )
     
 
@@ -30,7 +24,6 @@ def concise():
 def rectify():
     if request.method == 'POST':
         sentence = request.get_json().get('sentence')
-        # return jsonify({"sentence": sentence})
         return ( {"completion" : chat_completion("You are a writing assistant that helps the user with correcting grammatical mistakes in their text. Correct the mistakes in the following text", sentence)} )
     
     
@@ -38,7 +31,6 @@ def rectify():
 def formalize():
     if request.method == 'POST':
         sentence = request.get_json().get('sentence')
-        # return jsonify({"sentence": sentence})
         return ( {"completion" : chat_completion("I need to send a message to my boss. Please make the following message more formal", sentence)} )
 
 
