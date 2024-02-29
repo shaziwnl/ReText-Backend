@@ -12,7 +12,7 @@ def chat_completion(task, content):
     model="gpt-3.5-turbo",
     messages=[
       # {"role": "system", "content": "You are a writing assistant that helps the user with correcting grammatical mistakes in their text, or restructure sentences to make the meaning of the texts more clear or concise."},
-      {"role": "user", "content":  "Make this sentence " + task + "-" + '"' + content + '"'}
+      {"role": "user", "content": task + "-" + '"' + content + '"'}
     ]
   )
   return completion.choices[0].message.content
