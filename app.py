@@ -21,6 +21,8 @@ def verbose():
         except ValidationError :
             return ( {"completion" : "Invalid input"})
 
+
+
 @app.route('/concise', methods=['POST'])
 def concise():
     if request.method == 'POST':
@@ -31,7 +33,8 @@ def concise():
             return ( {"completion" : chat_completion("You are a writing assistant that helps make texts more concise. Make the following text more short and concise", sentence)} )
         except ValidationError :
             return ( {"completion" : "Invalid input"})
-            
+
+
 
 @app.route('/rectify', methods=['POST'])
 def rectify():
@@ -44,7 +47,8 @@ def rectify():
         except ValidationError :
             return ( {"completion" : "Invalid input"})
             
-    
+
+
 @app.route('/formalize', methods=['POST'])
 def formalize():
     if request.method == 'POST':
@@ -53,9 +57,10 @@ def formalize():
             InputSchema().load(data)
             sentence = data.get('sentence')
             return ( {"completion" : chat_completion("I need to send a message to my boss. Please make the following message more formal", sentence)} )
-        except:
+        except ValidationError:
             return ( {"completion" : "Invalid input"})
 
 if __name__ == "__main__":
-    # serve(app, host='0.0.0.0', port=50100, threads=4)
-    app.run(debug=True, port=8000)
+    serve(app, threads=4)
+    # app.run(debug=True, port=8000)
+
